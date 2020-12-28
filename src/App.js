@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 // app components
-import Navbar from "./Navbar";
+import Main from "./Main";
+import Home from "./Home";
+import Editor from "./Editor";
+// app utils
+import data from "./EditorFakeData";
 // react router
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // material-ui components
 import { Container, CssBaseline } from "@material-ui/core";
 
@@ -10,7 +14,19 @@ const App = () => {
   return (
     <Container fixed>
       <CssBaseline />
-      <Router>{/* <Navbar /> */}</Router>
+      <Router>
+        <Switch>
+          <Main>
+            <Route exact path="/" component={Home} />
+            <Route path="/my_document">
+              <Editor data={data("My Document")} />
+            </Route>
+            <Route path="/untitled">
+              <Editor data={data("Untitled")} />
+            </Route>
+          </Main>
+        </Switch>
+      </Router>
     </Container>
   );
 };
